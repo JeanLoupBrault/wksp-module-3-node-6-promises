@@ -15,6 +15,16 @@
 
 // Given an address as a string, returns the temperature
 // Use the getCurrentTemperatureAtPosition function
-function getCurrentTemperature(address) {
+const { getAddressPosition } = require('./exercise-2')
+const { getCurrentTemperature } = require('./exercise-3')
 
+
+function getCurrentTemperatureAtPosition(address) {
+    return getAddressPosition(address)
+        .then(data => {
+            console.log(data)
+            const promiseResult = getCurrentTemperature(data.lat, data.lng)
+            return promiseResult
+        })
 }
+getCurrentTemperatureAtPosition('1455 Boulevard de Maisonneuve O, Montréal, QC H3G 1M8').then(data => console.log(data))

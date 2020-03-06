@@ -11,28 +11,35 @@
 
 const opencage = require('opencage-api-client');
 
-
 function getAddressPosition(address) {
     const requestObj = {
-        key: '1315122032774d06b34c570f3bd70f7b',
+        //    key: '1315122032774d06b34c570f3bd70f7b',
+        //    q: address
+        key: '711ad987ba3e4437b9485cb746a48923',
         q: address
     };
 
     return opencage.geocode(requestObj)
         .then(data => {
-            // if (data.status.code == 200) {
-                // if (data.results.length > 0) {
+            if (data.status.code == 200) {
+                //console.log('Data status (200): ', data.status);
+                if (data.results.length > 0) {
                     const place = data.results[0];
-                    // console.log(place.geometry);
-                    return place;
-                // }
-            // } else {
-            //     // other possible response codes:
-            //     // https://opencagedata.com/api#codes
-            //     console.log('error', data.status.message);
-            // }
+                    //console.log('Place geometry', place.geometry);
+                    //console.log('Place formatted address', place.formatted);
+                    return place.geometry;
+                }
+            } else {
+                //     // other possible response codes:
+                //     // https://opencagedata.com/api#codes
+                if (data.status.code == 402) {
+                    console.log('Data status (402): ', data.status);
+                }
+                //console.log('error', data.status.message);
+            }
         })
         .catch(error => console.log('error', error.message));
 }
 
-console.log(getAddressPosition('1455 Boulevard de Maisonneuve O, Montréal, QC H3G 1M8'));
+//getAddressPosition('1455 Boulevard de Maisonneuve O, Montréal, QC H3G 1M8').then(result => console.log(result));
+module.exports = { getAddressPosition }

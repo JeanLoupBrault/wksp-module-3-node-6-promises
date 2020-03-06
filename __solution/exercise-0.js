@@ -6,7 +6,7 @@
 
 const compareToTen = (num) => {
     ppromise = new Promise((resolve, reject) => {
-        if(num > 10) {
+        if (num > 10) {
             resolve(num + " is greater than 10, success!")
         } else {
             reject(num + " is less than 10, error!")
@@ -24,7 +24,7 @@ compareToTen(8)
     .then(result => console.log(result))
     .catch(error => console.log(error))
 
-    
+
 // Exercise 0.2
 // ------------
 // Write two functions that use Promises that you can chain!
@@ -34,17 +34,17 @@ compareToTen(8)
 
 const arrayOfWords = ['cucumber', 'tomatos', 'avocado']
 const complicatedArray = ['cucumber', 44, true]
-  
+
 const makeAllCaps = (array) => {
     return new Promise((resolve, reject) => {
-    
-    let capsArray = array.map(word => {
-    
-    if(typeof word === 'string'){
-            return word.toUpperCase()
-        } else {
-            reject('Error: Not all items in the array are strings!')
-        }
+
+        let capsArray = array.map(word => {
+
+            if (typeof word === 'string') {
+                return word.toUpperCase()
+            } else {
+                reject('Error: Not all items in the array are strings!')
+            }
         })
         resolve(capsArray)
     })
@@ -53,31 +53,30 @@ const makeAllCaps = (array) => {
 
 const sortWords = (array) => {
     return new Promise((resolve, reject) => {
-    if(array) {
-        array.forEach((el) => {
-        if(typeof el !== 'string'){
-            reject('Error: Not all items in the array are strings!')
+        if (array) {
+            array.forEach((el) => {
+                if (typeof el !== 'string') {
+                    reject('Error: Not all items in the array are strings!')
+                }
+            })
+            resolve(array.sort());
+        } else {
+            reject('Error: Something went wrong with sorting words.')
         }
-        })
-        resolve(array.sort());
-    } else {
-        reject('Error: Something went wrong with sorting words.') 
-    }
-})
-} 
+    })
+}
 
 
 makeAllCaps(arrayOfWords)
-.then(sortWords)
-.then((result) => console.log(result))
-.catch(error => console.log(error))
+    .then(sortWords)
+    .then((result) => console.log(result))
+    .catch(error => console.log(error))
 
 makeAllCaps(complicatedArray)
-.then(sortWords)
-.then((result) => console.log(result))
-.catch(error => console.log(error))
+    .then(sortWords)
+    .then((result) => console.log(result))
+    .catch(error => console.log(error))
 
-    
-    
-    
-    
+
+
+
